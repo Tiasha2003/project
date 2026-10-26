@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Bill Splitter</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            padding: 20px;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 420px;
+        }
+
+        .card {
+            background: white;
+            padding: 35px;
+            border-radius: 25px;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.2);
+        }
+
+        .icon {
+            width: 70px;
+            height: 70px;
+            margin: 0 auto 15px;
+            border-radius: 50%;
+            background: #667eea;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 35px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #222;
+            margin-bottom: 8px;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #777;
+            margin-bottom: 30px;
+        }
+
+        .input-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+            color: #333;
+        }
+
+        input {
+            width: 100%;
+            padding: 14px;
+            border: 2px solid #ddd;
+            border-radius: 12px;
+            font-size: 16px;
+            outline: none;
+            transition: 0.3s;
+        }
+
+        input:focus {
+            border-color: #667eea;
+        }
+
+        button {
+            width: 100%;
+            padding: 15px;
+            border: none;
+            border-radius: 12px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(102, 126, 234, 0.4);
+        }
+
+        #result {
+            margin-top: 25px;
+            padding: 20px;
+            background: #f5f6ff;
+            border-radius: 15px;
+            text-align: center;
+            display: none;
+        }
+
+        #result h2 {
+            color: #667eea;
+            margin-bottom: 8px;
+        }
+
+        #amount {
+            font-size: 32px;
+            font-weight: bold;
+            color: #222;
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 20px;
+            color: #999;
+            font-size: 13px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+
+        <div class="card">
+
+            <div class="icon">💰</div>
+
+            <h1>Bill Splitter</h1>
+
+            <p class="subtitle">
+                Split your bill easily with friends
+            </p>
+
+            <div class="input-group">
+                <label for="bill">💵 Bill Amount</label>
+                <input
+                    type="number"
+                    id="bill"
+                    placeholder="Enter bill amount"
+                >
+            </div>
+
+            <div class="input-group">
+                <label for="tip">💡 Tip Percentage</label>
+                <input
+                    type="number"
+                    id="tip"
+                    placeholder="Enter tip %"
+                    value="10"
+                >
+            </div>
+
+            <div class="input-group">
+                <label for="people">👥 Number of People</label>
+                <input
+                    type="number"
+                    id="people"
+                    placeholder="Enter number of people"
+                >
+            </div>
+
+            <button onclick="calculateBill()">
+                Calculate Bill
+            </button>
+
+            <div id="result">
+
+                <h2>Each Person Pays</h2>
+
+                <div id="amount">
+                    ₹0.00
+                </div>
+
+            </div>
+
+            <div class="footer">
+                Made with ❤️ using JavaScript
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <script>
+
+        function calculateBill() {
+
+            const bill =
+                Number(document.getElementById("bill").value);
+
+            const tip =
+                Number(document.getElementById("tip").value);
+
+            const people =
+                Number(document.getElementById("people").value);
+
+
+            if (bill <= 0 || people <= 0) {
+
+                alert("Please enter a valid bill and number of people.");
+
+                return;
+            }
+
+
+            const tipAmount =
+                bill * (tip / 100);
+
+            const totalBill =
+                bill + tipAmount;
+
+            const perPerson =
+                totalBill / people;
+
+
+            document.getElementById("amount").innerText =
+                "₹" + perPerson.toFixed(2);
+
+            document.getElementById("result").style.display =
+                "block";
+        }
+
+    </script>
+
+</body>
+</html>
